@@ -1,8 +1,9 @@
 import './App.css';
+import { Home } from './pages';
 
 function App() {
   return (
-    <h1>Travel World</h1>
+    <Home />
   );
 }
 
