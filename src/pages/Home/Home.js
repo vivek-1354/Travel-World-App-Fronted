@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 
-import { HotelCard, Navbar } from "../../components";
+import { Categories, HotelCard, Navbar } from "../../components";
 import './Home.css'
 
 
@@ -39,6 +39,7 @@ export const Home = () => {
     return (
         <>
             <Navbar />
+            <Categories />
             {
                 hotels && hotels.length > 0 ? (
                     <InfiniteScroll
