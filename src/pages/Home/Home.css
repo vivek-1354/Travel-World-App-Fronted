@@ -1,0 +1,20 @@
+.main {
+    padding: 11rem 2rem 2rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center
+  }
+  
+  .main-item {
+    width: 100%;
+  }
+  
+  .gap-larger {
+    gap: 3rem;
+  }
+  
+  .alert-text {
+    margin: 2rem 0;
+    text-align: center;
+  }
