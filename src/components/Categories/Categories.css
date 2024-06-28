@@ -5,6 +5,8 @@
     position: fixed;
     z-index: 1;
     width: 100vw;
+    justify-content: space-between;
+
   }
   
   .gap-large {
@@ -32,7 +34,7 @@
   }
   
   .border-bottom {
-    border-bottom: 1px solid var(--text-color-primary);
+    border-bottom: 2px solid var(--text-color-primary);
   }
   
   .button.btn-filter {
