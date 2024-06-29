@@ -1,5 +1,6 @@
 import React from 'react'
 import './FinalPrice.css'
+import { SearchStayWithDate } from '../../components'
 
 export const FinalPrice = ({ hotel }) => {
     const { price, rating } = hotel
@@ -42,7 +43,6 @@ export const FinalPrice = ({ hotel }) => {
                     <span className='span'>Rs.{(price * 2) + 150}</span>
                 </div>
             </div>
-
         </div>
     )
 }
