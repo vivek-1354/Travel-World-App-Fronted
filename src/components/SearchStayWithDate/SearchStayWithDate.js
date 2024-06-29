@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react'
 import { useCategory, useDate } from '../../context'
 import { DateSelector } from '../DateSelector/DateSelector'
 import './SearchStayWithDate.css'
+import { useNavigate } from 'react-router-dom'
 
 
 export const SearchStayWithDate = () => {
     const [hotels, setHotels] = useState([])
     const { state, dateDispatch } = useDate()
     const { hotelCategory } = useCategory()
+    const navigate = useNavigate()
 
     const { destination, guests, isSearchResultOpen } = state
 
@@ -32,7 +34,7 @@ export const SearchStayWithDate = () => {
     const handalSearchClick = () => {
         dateDispatch({ type: "OPEN_SEARCH_MODAL" })
         dateDispatch({ type: "DATE_FOCUS" })
-        alert(guests)
+        navigate(`/hotels/${destination}/result`)
     }
 
     const destinationOptions = hotels.filter(({ address, state, city, country }) =>
