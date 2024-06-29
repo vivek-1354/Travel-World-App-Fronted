@@ -19,6 +19,18 @@ export const dateReducer = (state, action) => {
                 checkOutDate: action.payload
             }
             return newState;
+        case "SET_DESTINATION":
+            newState = {
+                ...state,
+                destination: action.payload
+            }
+            return newState;
+        case "SET_GUESTS":
+            newState = {
+                ...state,
+                guests: action.payload
+            }
+            return newState;
         default:
             return state;
     }

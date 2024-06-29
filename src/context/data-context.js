@@ -3,6 +3,8 @@ import { createContext, useContext, useReducer } from 'react'
 import { dateReducer } from '../reducer'
 
 const initialState = {
+    destination: "",
+    guests: 0,
     checkInDate: null,
     checkOutDate: null,
     isSearchModalOpen: false

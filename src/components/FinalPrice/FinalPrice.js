@@ -1,6 +1,5 @@
 import React from 'react'
 import './FinalPrice.css'
-import { SearchStayWithDate } from '../../components'
 
 export const FinalPrice = ({ hotel }) => {
     const { price, rating } = hotel
