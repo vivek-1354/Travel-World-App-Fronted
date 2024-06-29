@@ -31,6 +31,18 @@ export const dateReducer = (state, action) => {
                 guests: action.payload
             }
             return newState;
+        case "DATE_FOCUS":
+            newState = {
+                ...state,
+                isSearchResultOpen: false
+            }
+            return newState;
+        case "DESTINATION_FOCUS":
+            newState = {
+                ...state,
+                isSearchResultOpen: true
+            }
+            return newState;
         default:
             return state;
     }

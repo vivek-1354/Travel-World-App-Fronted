@@ -13,10 +13,15 @@ export const DateSelector = ({ checkInType }) => {
         // console.log(date)
     }
 
+    const handleDateFocus = () => {
+        dateDispatch({ type: "DATE_FOCUS" })
+    }
+
     return <DatePicker
         className='search-dest input'
         onChange={date => handleDateChange(date)}
         selected={checkInType === "in" ? state.checkInDate : state.checkOutDate}
+        onFocus={handleDateFocus}
         dateFormat="dd/MM/yyyy"
         placeholderText={"Add Dates"}
         closeOnScroll={true} />

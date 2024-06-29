@@ -7,7 +7,8 @@ const initialState = {
     guests: 0,
     checkInDate: null,
     checkOutDate: null,
-    isSearchModalOpen: false
+    isSearchModalOpen: false,
+    isSearchResultOpen: true
 }
 const DateContext = createContext(initialState)
 
