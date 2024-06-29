@@ -1,8 +1,21 @@
 import React from 'react'
 import './FinalPrice.css'
+import { useDate } from '../../context'
+import { DateSelector } from '../DateSelector/DateSelector'
 
 export const FinalPrice = ({ hotel }) => {
     const { price, rating } = hotel
+
+    const { state, dateDispatch } = useDate()
+    const { checkInDate, checkOutDate, guests } = state
+
+    const handleGuestChange = (e) => {
+        dateDispatch({
+            type: "SET_GUESTS",
+            payload: e.target.value
+        })
+    }
+
     return (
         <div className='price-details-container d-flex direction-column gap shadow'>
             <div className='price-rating d-flex align-center justify-space-between'>
@@ -15,14 +28,18 @@ export const FinalPrice = ({ hotel }) => {
                 <div className='grid-container-two-col selected-dates'>
                     <div className='checkin loc-container'>
                         <label htmlFor="">Check In</label>
+                        <DateSelector checkInType="in" />
                     </div>
                     <div className='checkin loc-container'>
                         <label htmlFor="">Check Out</label>
+                        <DateSelector checkInType="out" />
+                        {/* <p>{checkOutDate}</p> */}
                     </div>
                 </div>
                 <div className="data gutter-sm guests">
                     <p>Guests</p>
-                    <span >1 room, 2 adults</span>
+                    {guests <= 0 ? (<input type='number' className="guest-count-input" placeholder="Add Guests" value={guests} onChange={handleGuestChange} />) : <span >{`${guests} guests`} </span>}
+
                 </div>
             </div>
             <div>
