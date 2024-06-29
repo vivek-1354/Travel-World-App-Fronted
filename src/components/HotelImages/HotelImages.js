@@ -5,7 +5,7 @@ export const HotelImages = ({ hotel }) => {
     const { image, imageArr } = hotel
 
     return (
-        <div className="hotel-image-container d-flex gap-small">
+        <div className="hotel-image-container d-flex gap-5px">
             <div className="primary-image-conainer">
                 <img src={image} alt="primary-img" className="hotel-img primary-img" />
             </div>
