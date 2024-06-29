@@ -1,13 +1,27 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import './HotelCard.css'
 
 export const HotelCard = ({ hotel }) => {
     const [isSelected, setIsSelected] = React.useState(false)
 
-    const { image, name, price, rating, address, state } = hotel
+    const navigate = useNavigate()
+
+    const { _id, image, name, price, rating, address, state } = hotel
+
+    const handleHotelCardClick = () => {
+        navigate(`/hotels/${name}/${address}/${_id}/reserve`)
+    }
+
+    // const handleHotelCardClick = () => {
+    //     setIsSelected(!isSelected)
+    // }
+
+
+
     return (
         <div className="relative hotelcard-container shadow cursor-pointer">
-            <div >
+            <div onClick={handleHotelCardClick}>
                 <img className="img" src={image} alt={"hotel"} />
                 <div className="hotelcard-details">
                     <div className="d-flex align-center">
