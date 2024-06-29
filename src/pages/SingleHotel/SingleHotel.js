@@ -1,24 +1,29 @@
-import { useEffect, useParams, useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useParams } from 'react-router-dom';
+import { HotelDetails, HotelImages, Navbar } from '../../components';
+import './SingleHotel.css'
 
 export const SingleHotel = () => {
-    // const { id } = useParams();
-    // console.log(id)
-    // const [hotel, setHotel] = useState({});
+    const { id } = useParams();
+    const [hotel, setHotel] = useState();
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:8000/api/singlehotel/${id}`)
-    //         .then(res => res.json())
-    //         .then(data => setHotel(data))
-    // })
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/singlehotel/${id}`)
+            .then(res => res.json())
+            .then(data => setHotel(data))
+    }, [id])
     return (
-        <div>
-            <h1>singleHotel</h1>
-            {/* <h1>{hotel.name}</h1>
-            <p>{hotel.description}</p>
-            <p>{hotel.price}</p>
-            <p>{hotel.location}</p>
-            <p>{hotel.rating}</p> */}
+        <>
+            <Navbar />
+            <main className="single-hotel-page">
+                <p className='hotel-name-add'>{hotel && hotel.name} , {hotel && hotel.country}</p>
+                {hotel && <HotelImages hotel={hotel} />}
+                <div className='d-flex'>
+                    {hotel && <HotelDetails hotel={hotel} />}
+                </div>
+            </main>
 
-        </div>
+        </>
     )
 }

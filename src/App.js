@@ -7,7 +7,7 @@ function App() {
     // <Home />
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/hotels/:name/:address/reserve' element={<SingleHotel />} />
+      <Route path='/hotels/:name/:address/:id/reserve' element={<SingleHotel />} />
     </Routes>
   );
 }
