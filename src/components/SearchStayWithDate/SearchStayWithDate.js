@@ -1,23 +1,26 @@
+import { useDate } from '../../context'
 import { DateSelector } from '../DateSelector/DateSelector'
 import './SearchStayWithDate.css'
 
 import React from 'react'
 
 export const SearchStayWithDate = () => {
+
+    const { dateDispatch } = useDate()
     return (
         <div className='destination-container'>
-            <div className="destination-options d-flex align-center">
+            <div className="destionation-options d-flex align-center absolute">
                 <div className="location-container">
                     <label className='label' htmlFor="">Where</label>
                     <input type="text" placeholder='Search Destination' />
                 </div>
                 <div className="location-container">
                     <label className='label' htmlFor="">Check in</label>
-                    <DateSelector />
+                    <DateSelector checkInType={"in"} />
                 </div>
                 <div className="location-container">
                     <label className='label' htmlFor="">Check out</label>
-                    <DateSelector />
+                    <DateSelector checkInType={"out"} />
                 </div>
                 <div className="location-container">
                     <label className='label' htmlFor="">No. of Guests</label>
@@ -25,7 +28,7 @@ export const SearchStayWithDate = () => {
                 </div>
                 <div className="search-container d-flex align-center cursor">
                     <span className="material-symbols-outlined">search</span>
-                    <span>Search</span>
+                    <span onClick={() => dateDispatch({ type: "OPEN_SEARCH_MODAL" })}>Search</span>
                 </div>
             </div>
         </div>
