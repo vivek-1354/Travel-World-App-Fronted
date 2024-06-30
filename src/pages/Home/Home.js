@@ -5,7 +5,7 @@ import axios from "axios";
 import { Categories, Filter, HotelCard, Navbar, SearchStayWithDate } from "../../components";
 import { useCategory, useDate, useFilter } from '../../context';
 import './Home.css'
-import { getHotelByPrice, getHotelByRoomsAndBeds } from '../../utils';
+import { getHotelByPrice, getHotelByRoomsAndBeds, getHotelsByPropertyType, getHotelsByRatings } from '../../utils';
 
 
 export const Home = () => {
@@ -16,7 +16,7 @@ export const Home = () => {
     const { hotelCategory } = useCategory()
     const { state } = useDate()
     const { filterState } = useFilter()
-    const { priceRange, isFilterModalOpen, noOfBeds, noOfBedrooms, noOfBathrooms } = filterState
+    const { priceRange, isFilterModalOpen, noOfBeds, noOfBedrooms, noOfBathrooms, propertyType, noOfRatings } = filterState
 
     useEffect(() => {
         (
@@ -44,7 +44,9 @@ export const Home = () => {
     }
 
     const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
-    const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(hotels, noOfBathrooms, noOfBeds, noOfBedrooms)
+    // const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(hotels, noOfBathrooms, noOfBeds, noOfBedrooms)
+    // const filteredHotelsByPropertyType = getHotelsByPropertyType(hotels, propertyType)
+    const filteredHotelsByRatings = getHotelsByRatings(hotels, noOfRatings)
     return (
         <>
             <Navbar />
@@ -61,7 +63,7 @@ export const Home = () => {
                         }
                     >
                         <main className="main">
-                            {filteredHotelsByRoomsAndBeds && filteredHotelsByRoomsAndBeds.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
+                            {filteredHotelsByRatings && filteredHotelsByRatings.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
                         </main>
 
                     </InfiniteScroll>) : (<></>)

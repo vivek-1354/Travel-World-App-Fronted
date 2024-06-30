@@ -1,2 +1,5 @@
 export { getHotelByPrice } from './price-range'
 export { getHotelByRoomsAndBeds } from './rooms-beds'
+export { getHotelsByPropertyType } from './property-type'
+export { getHotelsByFreeCancel } from './cancelabel'
+export { getHotelsByRatings } from './rating'

@@ -39,6 +39,16 @@ export const filterReducer = (state, action) => {
                 ...state,
                 noOfBeds: action.payload === "Any" ? action.payload : Number(action.payload)
             }
+        case "ADD_PROPERTY_TYPE":
+            return {
+                ...state,
+                propertyType: action.payload
+            }
+        case "ADD_RATINGS":
+            return {
+                ...state,
+                noOfRatings: action.payload
+            }
         default:
             return state
     }

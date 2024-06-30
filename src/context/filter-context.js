@@ -7,6 +7,9 @@ const initialState = {
     noOfBathrooms: "Any",
     noOfBeds: "Any",
     noOfBedrooms: "Any",
+    propertyType: "Any",
+    noOfRatings: "Any",
+    freeCancelable: "Any",
 
 }
 const FilterContext = createContext(initialState)
