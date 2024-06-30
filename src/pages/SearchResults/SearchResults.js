@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { HotelCard, Navbar } from '../../components'
-import { useDate, useCategory } from '../../context'
+import { useDate } from '../../context'
 import './SearchResult.css'
 
 export const SearchResults = () => {

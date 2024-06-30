@@ -7,7 +7,7 @@ export const FinalPrice = ({ hotel }) => {
     const { price, rating } = hotel
 
     const { state, dateDispatch } = useDate()
-    const { checkInDate, checkOutDate, guests } = state
+    const { guests } = state
 
     const handleGuestChange = (e) => {
         dateDispatch({
