@@ -1,6 +1,6 @@
 import './Filter.css'
 
-import { PriceRange, PropertyType, Rating, RoomsAndBeds } from './index'
+import { FreeCancel, PriceRange, PropertyType, Rating, RoomsAndBeds } from './index'
 
 export const Filter = () => {
     return (
@@ -17,6 +17,11 @@ export const Filter = () => {
                     <RoomsAndBeds />
                     <PropertyType />
                     <Rating />
+                    <FreeCancel />
+                    <div className='filter-container d-flex justify-space-between'>
+                        <button className='button cursor btn-link-primary'>Clear All</button>
+                        <button className='button cursor btn-primary btn-apply'>Apply</button>
+                    </div>
                 </div>
             </div>
         </div>
