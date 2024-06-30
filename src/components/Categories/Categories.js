@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Categories.css'
-import { useCategory } from '../../context'
+import { useCategory, useFilter } from '../../context'
+import { useNavigate } from 'react-router-dom'
 
 export const Categories = () => {
     const [categories, setCategories] = useState([])
     const [numberOfCategoryToShow, setNumberOfCategoryToShow] = useState(0)
     const { hotelCategory, setCategory } = useCategory()
+    const navigate = useNavigate()
+    const { filterDispatch } = useFilter()
 
     useEffect(() => {
         (async () => {
@@ -34,8 +37,12 @@ export const Categories = () => {
     }
 
     const handleCategoryClick = (category) => {
-        console.log(hotelCategory, category)
         setCategory(category.category)
+    }
+
+    const handleFilterClick = () => {
+        filterDispatch({ type: 'HANDAL_MODAL_OPEN' })
+        navigate('/filters')
     }
 
     return (
@@ -58,6 +65,10 @@ export const Categories = () => {
                     <span className="material-symbols-outlined">chevron_right</span>
                 </button>
             }
+            <button className='button btn-filter d-flex align-center gap-small cursor-pointer' onClick={handleFilterClick}>
+                <span className="material-symbols-outlined">filter_alt</span>
+                <span>Filter</span>
+            </button>
         </section>
     )
 }
