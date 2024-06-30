@@ -24,6 +24,21 @@ export const filterReducer = (state, action) => {
                     )
                 ]
             }
+        case "ADD_BEDROOMS":
+            return {
+                ...state,
+                noOfBedrooms: action.payload === "Any" ? action.payload : Number(action.payload)
+            }
+        case "ADD_BATHROOMS":
+            return {
+                ...state,
+                noOfBathrooms: action.payload === "Any" ? action.payload : Number(action.payload)
+            }
+        case "ADD_BEDS":
+            return {
+                ...state,
+                noOfBeds: action.payload === "Any" ? action.payload : Number(action.payload)
+            }
         default:
             return state
     }

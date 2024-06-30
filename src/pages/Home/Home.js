@@ -5,7 +5,7 @@ import axios from "axios";
 import { Categories, Filter, HotelCard, Navbar, SearchStayWithDate } from "../../components";
 import { useCategory, useDate, useFilter } from '../../context';
 import './Home.css'
-import { getHotelByPrice } from '../../utils/price-range';
+import { getHotelByPrice, getHotelByRoomsAndBeds } from '../../utils';
 
 
 export const Home = () => {
@@ -16,7 +16,7 @@ export const Home = () => {
     const { hotelCategory } = useCategory()
     const { state } = useDate()
     const { filterState } = useFilter()
-    const { priceRange, isFilterModalOpen } = filterState
+    const { priceRange, isFilterModalOpen, noOfBeds, noOfBedrooms, noOfBathrooms } = filterState
 
     useEffect(() => {
         (
@@ -44,6 +44,7 @@ export const Home = () => {
     }
 
     const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
+    const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(hotels, noOfBathrooms, noOfBeds, noOfBedrooms)
     return (
         <>
             <Navbar />
@@ -60,7 +61,7 @@ export const Home = () => {
                         }
                     >
                         <main className="main">
-                            {filteredHotelsByPrice && filteredHotelsByPrice.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
+                            {filteredHotelsByRoomsAndBeds && filteredHotelsByRoomsAndBeds.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
                         </main>
 
                     </InfiniteScroll>) : (<></>)

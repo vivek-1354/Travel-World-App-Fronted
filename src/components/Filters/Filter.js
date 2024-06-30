@@ -7,12 +7,17 @@ import { FreeCancel, PriceRange, PropertyType, Rating, RoomsAndBeds } from './in
 export const Filter = () => {
     const navigate = useNavigate()
 
-    const { filterDispatch } = useFilter()
+    const { filterState, filterDispatch } = useFilter()
 
     const handleCloseClick = () => {
         filterDispatch({ type: 'HANDAL_MODAL_OPEN' })
         navigate('/')
     }
+
+    const handleApplyClick = () => {
+        console.log({ ...filterState })
+    }
+
     return (
         <div className='filter-modal'>
             <div className="filter-page shadow">
@@ -30,7 +35,7 @@ export const Filter = () => {
                     <FreeCancel />
                     <div className='filter-container d-flex justify-space-between'>
                         <button className='button cursor btn-link-primary'>Clear All</button>
-                        <button className='button cursor btn-primary btn-apply'>Apply</button>
+                        <button className='button cursor btn-primary btn-apply' onClick={handleApplyClick}>Apply</button>
                     </div>
                 </div>
             </div>

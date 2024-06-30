@@ -4,6 +4,9 @@ import { filterReducer } from '../reducer'
 const initialState = {
     isFilterModalOpen: false,
     priceRange: [300, 20000],
+    noOfBathrooms: "Any",
+    noOfBeds: "Any",
+    noOfBedrooms: "Any",
 
 }
 const FilterContext = createContext(initialState)
