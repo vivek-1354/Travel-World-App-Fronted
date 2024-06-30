@@ -12,11 +12,11 @@ export function PriceRange() {
     return (
         <div className="filter-container">
             <span className="filter-label">Price Range</span>
-            <Box sx={{ width: 300 }}>
-                <Slider
+            <Box>
+                <Slider sx={{ color: '#ff6525' }}
                     className='price-range'
                     getAriaLabel={() => 'Minimum Difference'}
-                    value={""}
+                    value={25000}
                     onChange={""}
                     valueLabelDisplay="on"
                     getAriaValueText={valuetext}

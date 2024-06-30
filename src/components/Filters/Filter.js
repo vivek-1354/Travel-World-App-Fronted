@@ -1,6 +1,6 @@
 import './Filter.css'
 
-import { PriceRange, RoomsAndBeds } from '../Filters'
+import { PriceRange, PropertyType, RoomsAndBeds } from './index'
 
 export const Filter = () => {
     return (
@@ -15,6 +15,7 @@ export const Filter = () => {
                 <div className="filter-content">
                     <PriceRange />
                     <RoomsAndBeds />
+                    <PropertyType />
                 </div>
             </div>
         </div>
