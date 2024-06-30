@@ -11,7 +11,7 @@ const propertyType = [
 
 export const PropertyType = () => {
 
-    const { filterDispatch } = useFilter()
+    const { filterState, filterDispatch } = useFilter()
 
     const handlePropertyClick = (propertyType) => {
         filterDispatch({
@@ -26,7 +26,7 @@ export const PropertyType = () => {
             <div className='d-flex gap-large'>
                 {
                     propertyType.map(({ id, type }) => (
-                        <span key={id} className='span-level property-type cursor-pointer align-center justify-center on-hover'
+                        <span key={id} className={`span-label property-type cursor-pointer align-center justify-center on-hover ${filterState.propertyType === type ? 'selected' : ''}`}
                             onClick={() => handlePropertyClick(type)}>
                             {type}
                         </span>))

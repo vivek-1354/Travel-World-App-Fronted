@@ -5,7 +5,7 @@ import axios from "axios";
 import { Categories, Filter, HotelCard, Navbar, SearchStayWithDate } from "../../components";
 import { useCategory, useDate, useFilter } from '../../context';
 import './Home.css'
-import { getHotelByPrice, getHotelByRoomsAndBeds, getHotelsByPropertyType, getHotelsByRatings } from '../../utils';
+import { getHotelByPrice, getHotelByRoomsAndBeds, getHotelsByPropertyType, getHotelsByRatings, getHotelsByFreeCancel } from '../../utils';
 
 
 export const Home = () => {
@@ -16,7 +16,7 @@ export const Home = () => {
     const { hotelCategory } = useCategory()
     const { state } = useDate()
     const { filterState } = useFilter()
-    const { priceRange, isFilterModalOpen, noOfBeds, noOfBedrooms, noOfBathrooms, propertyType, noOfRatings } = filterState
+    const { priceRange, isFilterModalOpen, noOfBeds, noOfBedrooms, noOfBathrooms, propertyType, noOfRatings, isCancelable } = filterState
 
     useEffect(() => {
         (
@@ -43,10 +43,17 @@ export const Home = () => {
         }, 1000)
     }
 
-    const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
+    // const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
     // const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(hotels, noOfBathrooms, noOfBeds, noOfBedrooms)
     // const filteredHotelsByPropertyType = getHotelsByPropertyType(hotels, propertyType)
-    const filteredHotelsByRatings = getHotelsByRatings(hotels, noOfRatings)
+    // const filteredHotelsByRatings = getHotelsByRatings(hotels, noOfRatings)
+    // const filteredHotelsByFreeCancel = getHotelsByFreeCancel(hotels, isCancelable )
+
+    let filteredHotels = getHotelByPrice(hotels, priceRange)
+    filteredHotels = getHotelByRoomsAndBeds(filteredHotels, noOfBathrooms, noOfBeds, noOfBedrooms)
+    filteredHotels = getHotelsByPropertyType(filteredHotels, propertyType)
+    filteredHotels = getHotelsByRatings(filteredHotels, noOfRatings)
+    // filteredHotels = getHotelsByFreeCancel(hotels, isCancelable)
     return (
         <>
             <Navbar />
@@ -63,13 +70,13 @@ export const Home = () => {
                         }
                     >
                         <main className="main">
-                            {filteredHotelsByRatings && filteredHotelsByRatings.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
+                            {filteredHotels && filteredHotels.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
                         </main>
 
                     </InfiniteScroll>) : (<></>)
             }
             {state.isSearchModalOpen && <SearchStayWithDate />}
-            {isFilterModalOpen && <Filter filteredHotelsByPrice={filteredHotelsByPrice} />}
+            {isFilterModalOpen && <Filter />}
         </>
 
     )

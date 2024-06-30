@@ -14,7 +14,14 @@ export const Filter = () => {
         navigate('/')
     }
 
+    const handleClearFilterClick = () => {
+        filterDispatch({
+            type: 'CLEAR_ALL'
+        })
+    }
+
     const handleApplyClick = () => {
+        filterDispatch({ type: 'HANDAL_MODAL_OPEN' })
         console.log({ ...filterState })
     }
 
@@ -34,7 +41,7 @@ export const Filter = () => {
                     <Rating />
                     <FreeCancel />
                     <div className='filter-container d-flex justify-space-between'>
-                        <button className='button cursor btn-link-primary'>Clear All</button>
+                        <button className='button cursor btn-link-primary' onClick={handleClearFilterClick}>Clear All</button>
                         <button className='button cursor btn-primary btn-apply' onClick={handleApplyClick}>Apply</button>
                     </div>
                 </div>

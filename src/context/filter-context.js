@@ -9,8 +9,7 @@ const initialState = {
     noOfBedrooms: "Any",
     propertyType: "Any",
     noOfRatings: "Any",
-    freeCancelable: "Any",
-
+    isCancelable: true,
 }
 const FilterContext = createContext(initialState)
 

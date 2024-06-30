@@ -49,6 +49,22 @@ export const filterReducer = (state, action) => {
                 ...state,
                 noOfRatings: action.payload
             }
+        case "FREE_CANCEL":
+            return {
+                ...state,
+                isCancelable: action.payload
+            }
+        case "CLEAR_ALL":
+            return {
+                ...state,
+                priceRange: [300, 20000],
+                noOfBathrooms: "Any",
+                noOfBeds: "Any",
+                noOfBedrooms: "Any",
+                propertyType: "Any",
+                noOfRatings: "Any",
+                isCancelable: false,
+            }
         default:
             return state
     }

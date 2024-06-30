@@ -5,7 +5,7 @@ const ratings = ["1", "2", "3", "4", "5"]
 
 export const Rating = () => {
 
-    const { filterDispatch } = useFilter()
+    const { filterState, filterDispatch } = useFilter()
 
     const handleRatingClick = (rating) => {
         filterDispatch({
@@ -19,7 +19,7 @@ export const Rating = () => {
 
             <div className="d-flex align-center gap">
                 {ratings.map(rating => <span
-                    className='span-label aminity-count d-flex align-center justify-center cursor-pointer star on-hover'
+                    className={`span-label aminity-count d-flex align-center justify-center cursor-pointer star on-hover ${filterState.noOfRatings.toString() === rating ? 'selected' : ""}`}
                     key={rating}
                     onClick={() => handleRatingClick(rating)}
                 >{rating} &Up</span>)}
