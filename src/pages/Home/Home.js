@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 
-import { Categories, HotelCard, Navbar, SearchStayWithDate } from "../../components";
-import { useCategory, useDate } from '../../context';
+import { Categories, Filter, HotelCard, Navbar, SearchStayWithDate } from "../../components";
+import { useCategory, useDate, useFilter } from '../../context';
 import './Home.css'
+import { getHotelByPrice } from '../../utils/price-range';
 
 
 export const Home = () => {
@@ -14,6 +15,8 @@ export const Home = () => {
     const [hotels, setHotels] = useState([])
     const { hotelCategory } = useCategory()
     const { state } = useDate()
+    const { filterState } = useFilter()
+    const { priceRange, isFilterModalOpen } = filterState
 
     useEffect(() => {
         (
@@ -39,6 +42,8 @@ export const Home = () => {
             }
         }, 1000)
     }
+
+    const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
     return (
         <>
             <Navbar />
@@ -55,12 +60,13 @@ export const Home = () => {
                         }
                     >
                         <main className="main">
-                            {hotels && hotels.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
+                            {filteredHotelsByPrice && filteredHotelsByPrice.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
                         </main>
 
                     </InfiniteScroll>) : (<></>)
             }
             {state.isSearchModalOpen && <SearchStayWithDate />}
+            {isFilterModalOpen && <Filter filteredHotelsByPrice={filteredHotelsByPrice} />}
         </>
 
     )

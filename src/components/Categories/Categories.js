@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Categories.css'
 import { useCategory, useFilter } from '../../context'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 export const Categories = () => {
     const [categories, setCategories] = useState([])
     const [numberOfCategoryToShow, setNumberOfCategoryToShow] = useState(0)
     const { hotelCategory, setCategory } = useCategory()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { filterDispatch } = useFilter()
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export const Categories = () => {
 
     const handleFilterClick = () => {
         filterDispatch({ type: 'HANDAL_MODAL_OPEN' })
-        navigate('/filters')
+        // navigate('/filters')
     }
 
     return (

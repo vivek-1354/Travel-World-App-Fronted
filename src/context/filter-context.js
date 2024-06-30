@@ -2,15 +2,17 @@ import { createContext, useContext, useReducer } from 'react'
 import { filterReducer } from '../reducer'
 
 const initialState = {
-    isFilterModalOpen: false
+    isFilterModalOpen: false,
+    priceRange: [300, 20000],
+
 }
 const FilterContext = createContext(initialState)
 
 const FilterContextProvider = ({ children }) => {
 
-    const [state, filterDispatch] = useReducer(filterReducer, initialState)
+    const [filterState, filterDispatch] = useReducer(filterReducer, initialState)
     return (
-        <FilterContext.Provider value={{ state, filterDispatch }}>
+        <FilterContext.Provider value={{ filterState, filterDispatch }}>
             {children}
         </FilterContext.Provider>
     )
