@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { useAuth, useDate } from "../../context";
 
 export const Navbar = () => {
-  const { authDispatch } = useAuth();
+  const { authState, authDispatch } = useAuth();
   const { state, dateDispatch } = useDate();
   const { destination, checkInDate, checkOutDate, guests } = state;
 
@@ -54,6 +54,9 @@ export const Navbar = () => {
         <span className="search material-symbols-outlined">search</span>
       </div>
       <nav className="d-flex align-center gap-large">
+        {authState.accessToken && (
+          <i style={{ color: "black" }}>Hi, {authState.username}</i>
+        )}
         <div className="nav d-flex align-center cursor-pointer">
           <span
             className="material-symbols-outlined profile-option menu"

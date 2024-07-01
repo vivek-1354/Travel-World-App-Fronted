@@ -9,6 +9,7 @@ const initialState = {
   password: "",
   confirmPassword: "",
   selectedTab: "login",
+  accessToken: "",
 };
 
 const AuthContext = createContext(initialState);

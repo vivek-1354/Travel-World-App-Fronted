@@ -7,6 +7,7 @@ import {
   validateNumber,
 } from "../../utils";
 import "./Auth.css";
+import { signupHandler } from "../../services";
 
 export const AuthSignup = () => {
   const { authState, authDispatch } = useAuth();
@@ -18,14 +19,8 @@ export const AuthSignup = () => {
   const confirmPassword = useRef();
 
   const handleSubmitClick = (e) => {
-    const isValidNumber = validateNumber(number.current.value);
-    const isValidName = validateName(username.current.value);
-    const isValidEmail = validateEmail(email.current.value);
-    const isValidPassword = validatePassword(password.current.value);
-    const isValidConfirmPassword =
-      password.current.value === confirmPassword.current.value;
     e.preventDefault();
-
+    console.log(password.current.value);
     const data = {
       number: number.current.value,
       username: username.current.value,
@@ -33,6 +28,19 @@ export const AuthSignup = () => {
       password: password.current.value,
       confirmPassword: confirmPassword.current.value,
     };
+
+    authDispatch({
+      type: "ADD_USER_INFO",
+      payload: data,
+    });
+
+    const isValidNumber = validateNumber(data.number);
+    const isValidName = validateName(data.username);
+    const isValidEmail = validateEmail(data.email);
+    const isValidPassword = validatePassword(data.password);
+    const isValidConfirmPassword =
+      data.password.toString() === data.confirmPassword.toString();
+
     if (
       isValidNumber &&
       isValidName &&
@@ -40,14 +48,14 @@ export const AuthSignup = () => {
       isValidPassword &&
       isValidConfirmPassword
     ) {
+      signupHandler(data.username, data.number, data.email, data.password);
       authDispatch({
-        type: "ADD_USER_INFO",
-        payload: data,
+        type: "CLEAR_USER_INFO",
       });
     }
 
-    // console.log(data);
-    console.log({ authState });
+    console.log(data);
+    console.log(authState);
   };
 
   return (
