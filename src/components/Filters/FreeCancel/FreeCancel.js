@@ -22,7 +22,6 @@ export const FreeCancel = () => {
                 <span className="filter-label">Free Cancelation</span>
                 <label htmlFor="" className="slide">
                     <input type="checkbox" onChange={handleCancelChange} checked={isCancelable} />
-                    <span className="slider round"></span>
                 </label>
             </div>
 

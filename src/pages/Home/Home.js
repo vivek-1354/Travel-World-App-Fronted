@@ -49,11 +49,11 @@ export const Home = () => {
     // const filteredHotelsByRatings = getHotelsByRatings(hotels, noOfRatings)
     // const filteredHotelsByFreeCancel = getHotelsByFreeCancel(hotels, isCancelable )
 
-    let filteredHotels = getHotelByPrice(hotels, priceRange)
-    filteredHotels = getHotelByRoomsAndBeds(filteredHotels, noOfBathrooms, noOfBeds, noOfBedrooms)
-    filteredHotels = getHotelsByPropertyType(filteredHotels, propertyType)
-    filteredHotels = getHotelsByRatings(filteredHotels, noOfRatings)
-    // filteredHotels = getHotelsByFreeCancel(hotels, isCancelable)
+    const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
+    const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(filteredHotelsByPrice, noOfBathrooms, noOfBeds, noOfBedrooms)
+    const filterHotelsByPropertyType = getHotelsByPropertyType(filteredHotelsByRoomsAndBeds, propertyType)
+    const filteredHotelsByRatings = getHotelsByRatings(filterHotelsByPropertyType, noOfRatings)
+    const filteredHotelsByFreeCancel = getHotelsByFreeCancel(filteredHotelsByRatings, isCancelable)
     return (
         <>
             <Navbar />
@@ -70,7 +70,7 @@ export const Home = () => {
                         }
                     >
                         <main className="main">
-                            {filteredHotels && filteredHotels.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
+                            {filteredHotelsByFreeCancel && filteredHotelsByFreeCancel.map(hotel => <HotelCard key={hotel._id} hotel={hotel} />)}
                         </main>
 
                     </InfiniteScroll>) : (<></>)
