@@ -30,7 +30,6 @@ export const Home = () => {
   const { filterState } = useFilter();
   const { authState } = useAuth();
 
-  console.log(authState);
   const {
     priceRange,
     isFilterModalOpen,

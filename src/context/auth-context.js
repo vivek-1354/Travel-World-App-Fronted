@@ -3,10 +3,11 @@ import { authReducer } from "../reducer";
 
 const initialState = {
   isAuthModalOpen: false,
-  name: "",
+  username: "",
   number: "",
   email: "",
   password: "",
+  confirmPassword: "",
   selectedTab: "login",
 };
 
