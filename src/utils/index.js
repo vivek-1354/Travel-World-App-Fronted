@@ -1,5 +1,9 @@
-export { getHotelByPrice } from './price-range'
-export { getHotelByRoomsAndBeds } from './rooms-beds'
-export { getHotelsByPropertyType } from './property-type'
-export { getHotelsByFreeCancel } from './cancelabel'
-export { getHotelsByRatings } from './rating'
+export { getHotelByPrice } from "./price-range";
+export { getHotelByRoomsAndBeds } from "./rooms-beds";
+export { getHotelsByPropertyType } from "./property-type";
+export { getHotelsByFreeCancel } from "./cancelabel";
+export { getHotelsByRatings } from "./rating";
+export { validateName } from "./name-regex";
+export { validateEmail } from "./email-regex";
+export { validatePassword } from "./password-regex";
+export { validateNumber } from "./number-regex";
