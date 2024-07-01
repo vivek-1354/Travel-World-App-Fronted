@@ -1,0 +1,19 @@
+.slide {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .slide input {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .slide input[type="checkbox"]:checked {
+    background-color: var(--text-color-primary) ;
+  }
