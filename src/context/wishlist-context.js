@@ -1,14 +1,20 @@
 import { createContext, useContext, useReducer } from "react";
 import { wishlistReducer } from "../reducer";
 
+const initialState = {
+  wishlist: [],
+};
 //create context
-const WishlistContext = createContext([]);
+const WishlistContext = createContext(initialState);
 
 //provider
 const WishlistProvider = ({ children }) => {
-  const [wishlist, dispatch] = useReducer(wishlistReducer, []);
+  const [wishlistState, wishlistDispatch] = useReducer(
+    wishlistReducer,
+    initialState
+  );
   return (
-    <WishlistContext.Provider value={{ wishlist, dispatch }}>
+    <WishlistContext.Provider value={{ wishlistState, wishlistDispatch }}>
       {children}
     </WishlistContext.Provider>
   );
