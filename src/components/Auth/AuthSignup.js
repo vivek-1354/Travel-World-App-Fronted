@@ -30,6 +30,10 @@ export const AuthSignup = () => {
     };
 
     authDispatch({
+      type: "HANDLE_LOGIN",
+    });
+
+    authDispatch({
       type: "ADD_USER_INFO",
       payload: data,
     });
