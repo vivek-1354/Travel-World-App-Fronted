@@ -23,6 +23,15 @@
     box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.1);
 }
 
+.menu-icons:hover {
+  display: flex;
+  align-items: center;
+  border: 1px solid orange;
+  border-radius: 50%;
+  background-color: #FF6525;
+}
+
+
 .form-container {
     background-color: #fff;
     height: 2.75rem;

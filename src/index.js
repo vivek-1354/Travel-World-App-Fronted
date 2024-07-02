@@ -9,6 +9,7 @@ import {
   DateProvider,
   FilterContextProvider,
 } from "./context";
+import { WishlistProvider } from "./context/wishlist-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,7 +19,9 @@ root.render(
         <DateProvider>
           <FilterContextProvider>
             <AuthContextProvider>
-              <App />
+              <WishlistProvider>
+                <App />
+              </WishlistProvider>
             </AuthContextProvider>
           </FilterContextProvider>
         </DateProvider>
