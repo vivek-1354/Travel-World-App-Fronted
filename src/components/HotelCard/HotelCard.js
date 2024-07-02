@@ -27,7 +27,6 @@ export const HotelCard = ({ hotel }) => {
     if (authState.accessToken) {
       if (!isHotelInWishList) {
         wishlistDispatch({ type: "ADD_TO_WISHLIST", payload: hotel });
-        navigate("/wishlist");
       } else if (isSelected) {
         wishlistDispatch({ type: "REMOVE_FRON_WISHLIST", payload: hotel._id });
       }
@@ -64,14 +63,22 @@ export const HotelCard = ({ hotel }) => {
         onClick={handleWishlistClick}
       >
         <span
-          className={`material-symbols-outlined favorite cursor ${
-            wishlistState.wishlist.find((hotel) => hotel._id === _id)
-              ? "fav-selected"
-              : ""
-          }`}
+          className="favorite cursor-pointer"
           onClick={() => setIsSelected(!isSelected)}
         >
-          favorite
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill={
+              wishlistState.wishlist.find((hotel) => hotel._id === _id)
+                ? "#EA3323"
+                : "grey"
+            }
+          >
+            <path d="m479-60-87-79q-108-98-178-168.5T104-434q-40-56-55.5-103.5T33-637q0-113 76-189.5T298-903q50 0 96.5 17.5T479-836q38-32 84.5-49.5T660-903q113 0 190 76.5T927-637q0 51-15.5 98.5t-55.5 103Q816-380 746-309T566-139l-87 79Z" />
+          </svg>
         </span>{" "}
       </button>
     </div>

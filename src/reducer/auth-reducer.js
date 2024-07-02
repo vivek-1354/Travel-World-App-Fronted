@@ -15,14 +15,11 @@ export const authReducer = (state, action) => {
         password: "",
         confirmPassword: "",
       };
-    case "ADD_USER_INFO":
+    case "LOGOUT":
       return {
         ...state,
-        username: action.payload.username,
-        number: action.payload.number,
-        email: action.payload.email,
-        password: action.payload.password,
-        confirmPassword: action.payload.confirmPassword,
+        username: "",
+        accessToken: "",
       };
     case "SET_USER_NAME":
       return { ...state, username: action.payload };
