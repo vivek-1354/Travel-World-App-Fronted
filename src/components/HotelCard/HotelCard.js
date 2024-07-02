@@ -1,14 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./HotelCard.css";
-import { useWishlist } from "../../context";
+import { useAuth, useWishlist } from "../../context";
+import { findHotelInWishlist } from "../../utils";
 
 export const HotelCard = ({ hotel }) => {
   const [isSelected, setIsSelected] = React.useState(false);
 
+  const { authState, authDispatch } = useAuth();
   const navigate = useNavigate();
 
   const { wishlistState, wishlistDispatch } = useWishlist();
+
+  const isHotelInWishList = findHotelInWishlist(
+    wishlistState.wishlist,
+    hotel._id
+  );
 
   const { _id, image, name, price, rating, address, state } = hotel;
 
@@ -17,8 +24,18 @@ export const HotelCard = ({ hotel }) => {
   };
 
   const handleWishlistClick = () => {
-    wishlistDispatch({ type: "ADD_TO_WISHLIST", payload: hotel });
-    console.log(wishlistState.wishlist);
+    if (authState.accessToken) {
+      if (!isHotelInWishList) {
+        wishlistDispatch({ type: "ADD_TO_WISHLIST", payload: hotel });
+        navigate("/wishlist");
+      } else if (isSelected) {
+        wishlistDispatch({ type: "REMOVE_FRON_WISHLIST", payload: hotel._id });
+      }
+    } else {
+      authDispatch({
+        type: "OPEN_AUTH_MODAL",
+      });
+    }
   };
 
   return (
@@ -48,7 +65,9 @@ export const HotelCard = ({ hotel }) => {
       >
         <span
           className={`material-symbols-outlined favorite cursor ${
-            isSelected ? "fav-selected" : ""
+            wishlistState.wishlist.find((hotel) => hotel._id === _id)
+              ? "fav-selected"
+              : ""
           }`}
           onClick={() => setIsSelected(!isSelected)}
         >
