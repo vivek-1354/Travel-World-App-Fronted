@@ -9,7 +9,7 @@ export const Wishlist = () => {
 
   useEffect(() => {
     setWishlist(wishlistState.wishlist);
-  }, []);
+  }, [wishlistState.wishlist]);
   return (
     <>
       <Navbar />
