@@ -2,6 +2,8 @@ export const authReducer = (state, action) => {
   switch (action.type) {
     case "OPEN_AUTH_MODAL":
       return { ...state, isAuthModalOpen: !state.isAuthModalOpen };
+    case "OPEN_MENU_MODAL":
+      return { ...state, isMenuModalOpen: !state.isMenuModalOpen };
     case "HANDLE_LOGIN":
       return { ...state, selectedTab: "login" };
     case "HANDLE_SIGNUP":

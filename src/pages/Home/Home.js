@@ -7,6 +7,7 @@ import {
   Categories,
   Filter,
   HotelCard,
+  MenuModal,
   Navbar,
   SearchStayWithDate,
 } from "../../components";
@@ -26,7 +27,7 @@ export const Home = () => {
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
   const { hotelCategory } = useCategory();
-  const { state } = useDate();
+  const { Datestate } = useDate();
   const { filterState } = useFilter();
   const { authState } = useAuth();
 
@@ -117,9 +118,10 @@ export const Home = () => {
       ) : (
         <></>
       )}
-      {state.isSearchModalOpen && <SearchStayWithDate />}
+      {Datestate.isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
       {authState.isAuthModalOpen && <AuthModal />}
+      {authState.isMenuModalOpen && <MenuModal />}
     </>
   );
 };
