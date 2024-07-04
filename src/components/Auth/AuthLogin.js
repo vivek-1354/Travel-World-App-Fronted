@@ -65,6 +65,12 @@ export const AuthLogin = () => {
       });
     }
   };
+
+  const handleCreateNewAccount = () => {
+    authDispatch({
+      type: "HANDLE_SIGNUP",
+    });
+  };
   return (
     <div className="auth-container">
       <form onSubmit={handleLogin}>
@@ -103,6 +109,10 @@ export const AuthLogin = () => {
           </button>
         </div>
       </form>
+      <center>
+        <strong>Or</strong>
+      </center>
+      <hr />
       <div className="cta">
         <button
           className="button btn-outline-primary btn-login cursor-pointer"
@@ -110,6 +120,19 @@ export const AuthLogin = () => {
           name="guest-login"
         >
           Login as Guest
+        </button>
+      </div>
+      <center>
+        <strong>Or</strong>
+      </center>
+      <hr />
+      <div className="cta">
+        <button
+          className="button btn-outline-primary btn-login cursor-pointer"
+          onClick={handleCreateNewAccount}
+          name="guest-login"
+        >
+          Create a new account
         </button>
       </div>
     </div>

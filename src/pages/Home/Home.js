@@ -7,6 +7,7 @@ import {
   Categories,
   Filter,
   HotelCard,
+  MenuModal,
   Navbar,
   SearchStayWithDate,
 } from "../../components";
@@ -120,6 +121,7 @@ export const Home = () => {
       {Datestate.isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
       {authState.isAuthModalOpen && <AuthModal />}
+      {authState.isMenuModalOpen && <MenuModal />}
     </>
   );
 };

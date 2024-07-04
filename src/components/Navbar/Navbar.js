@@ -14,9 +14,15 @@ export const Navbar = () => {
   };
 
   const handleAuthClick = () => {
-    authDispatch({
-      type: "OPEN_AUTH_MODAL",
-    });
+    if (authState.accessToken) {
+      authDispatch({
+        type: "OPEN_MENU_MODAL",
+      });
+    } else {
+      authDispatch({
+        type: "OPEN_AUTH_MODAL",
+      });
+    }
   };
 
   const handleMenuClick = () => {
