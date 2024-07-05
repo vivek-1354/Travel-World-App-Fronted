@@ -1,38 +1,46 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useCategory, useDate } from "../../context";
 import { DateSelector } from "../DateSelector/DateSelector";
 import "./SearchStayWithDate.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  handleDateFocus,
+  handleSetDestination,
+  handleSetDestinationFocus,
+  handleSetGuests,
+  openSearchModal,
+} from "../../Redux/actions/dateActions";
 
 export const SearchStayWithDate = () => {
   const [hotels, setHotels] = useState([]);
-  const { Datestate, dateDispatch } = useDate();
-  const { hotelCategory } = useCategory();
+  const dispatch = useDispatch();
+  const dateState = useSelector((state) => state.dateReducer);
+  const hotelCategory = useSelector((state) => state.categoryReducer);
   const navigate = useNavigate();
 
-  const { destination, guests, isSearchResultOpen } = Datestate;
+  const { destination, guests, isSearchResultOpen } = dateState;
 
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `http://localhost:8000/api/hotels?category=${hotelCategory}`
+        `http://localhost:8000/api/hotels?category=${hotelCategory.category}`
       );
       setHotels(response.data);
     })();
-  }, [hotelCategory]);
+  }, [hotelCategory.category]);
 
   const handleDestinationChange = (event) => {
-    dateDispatch({ type: "SET_DESTINATION", payload: event.target.value });
+    dispatch(handleSetDestination(event.target.value));
   };
 
   const handleGuestsChange = (event) => {
-    dateDispatch({ type: "SET_GUESTS", payload: event.target.value });
+    dispatch(handleSetGuests(event.target.value));
   };
 
   const handalSearchClick = () => {
-    dateDispatch({ type: "OPEN_SEARCH_MODAL" });
-    dateDispatch({ type: "DATE_FOCUS" });
+    dispatch(openSearchModal());
+    dispatch(handleDateFocus());
     navigate(`/hotels/${destination}/result`);
   };
 
@@ -45,71 +53,81 @@ export const SearchStayWithDate = () => {
   );
 
   const handleDestinationSearch = (address) => {
-    dateDispatch({
-      type: "SET_DESTINATION",
-      payload: address,
-    });
-    dateDispatch({ type: "DATE_FOCUS" });
+    dispatch(handleSetDestination(address));
+    dispatch(handleDateFocus());
   };
 
   const handleDestinationFocus = () => {
-    dateDispatch({ type: "DESTINATION_FOCUS" });
+    dispatch(handleSetDestinationFocus());
   };
 
   return (
     <div className="destination-container">
-      <div className="destionation-options d-flex align-center absolute">
-        <div className="location-container">
-          <label className="label" htmlFor="">
-            Where
-          </label>
-          <input
-            value={destination}
-            onChange={handleDestinationChange}
-            onFocus={handleDestinationFocus}
-            placeholder="Search Destination"
-            autoFocus
-          />
+      <div className="destionation-options  absolute">
+        <div className="d-flex align-center">
+          <div className="">
+            <label className="label" htmlFor="">
+              Where
+            </label>
+            <input
+              value={destination}
+              onChange={handleDestinationChange}
+              onFocus={handleDestinationFocus}
+              placeholder="Search Destination"
+              autoFocus
+              required={true}
+            />
+          </div>
+          <div className="">
+            <label className="label" htmlFor="">
+              Check in
+            </label>
+            <DateSelector checkInType={"in"} />
+          </div>
+          <div className="">
+            <label className="label" htmlFor="">
+              Check out
+            </label>
+            <DateSelector checkInType={"out"} />
+          </div>
+          <div className="">
+            <label className="label" htmlFor="">
+              No. of Guests
+            </label>
+            <input
+              value={guests}
+              type="text"
+              placeholder="Add guests"
+              onChange={handleGuestsChange}
+            />
+          </div>
+          <button
+            className="search-container d-flex align-center cursor"
+            onClick={handalSearchClick}
+            disabled={destination ? false : true}
+          >
+            <span className="material-symbols-outlined">search</span>
+            <span>Search</span>
+          </button>
+          <button
+            className="search-container closee d-flex align-center cursor"
+            onClick={() => dispatch(openSearchModal())}
+          >
+            <span>Close</span>
+          </button>
         </div>
-        <div className="location-container">
-          <label className="label" htmlFor="">
-            Check in
-          </label>
-          <DateSelector checkInType={"in"} />
+        <div className="search-result-container absolute">
+          {isSearchResultOpen &&
+            destinationOptions &&
+            destinationOptions.map(({ address, city }) => (
+              <p
+                className="p cursor-pointer"
+                onClick={() => handleDestinationSearch(address)}
+              >
+                {address}, {city}
+              </p>
+            ))}
         </div>
-        <div className="location-container">
-          <label className="label" htmlFor="">
-            Check out
-          </label>
-          <DateSelector checkInType={"out"} />
-        </div>
-        <div className="location-container">
-          <label className="label" htmlFor="">
-            No. of Guests
-          </label>
-          <input
-            value={guests}
-            type="text"
-            placeholder="Add guests"
-            onChange={handleGuestsChange}
-          />
-        </div>
-        <div className="search-container d-flex align-center cursor">
-          <span className="material-symbols-outlined">search</span>
-          <span onClick={handalSearchClick}>Search</span>
-        </div>
-      </div>
-      <div className="search-result-container absolute">
-        {isSearchResultOpen &&
-          destinationOptions &&
-          destinationOptions.map(({ address, city }) => (
-            <p
-              className="p cursor-pointer"
-              onClick={() => handleDestinationSearch(address)}
-            >
-              {address}, {city}
-            </p>
-          ))}
       </div>
     </div>
   );

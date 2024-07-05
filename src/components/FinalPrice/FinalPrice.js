@@ -1,26 +1,31 @@
 import React from "react";
 import "./FinalPrice.css";
-import { useDate } from "../../context";
 import { DateSelector } from "../DateSelector/DateSelector";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { handleSetGuests } from "../../Redux/actions/dateActions";
 
 export const FinalPrice = ({ hotel }) => {
   const { _id, price, rating } = hotel;
 
   const navigate = useNavigate();
 
-  const { Datestate, dateDispatch } = useDate();
-  const { checkInDate, checkOutDate, guests } = Datestate;
+  const dispatch = useDispatch();
+  const dateState = useSelector((state) => state.dateReducer);
+  const { checkInDate, checkOutDate, guests } = dateState;
 
   const handleGuestChange = (e) => {
-    dateDispatch({
-      type: "SET_GUESTS",
-      payload: e.target.value,
-    });
+    dispatch(handleSetGuests(e.target.value));
   };
+
   const handleReserveClick = () => {
     navigate(`/confirm-payment/stay/${_id}`);
   };
+
+  const numberOfNights =
+    checkInDate && checkOutDate
+      ? (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 3600 * 24)
+      : 0;
 
   return (
     <div className="price-details-container d-flex direction-column gap shadow">
@@ -35,7 +40,7 @@ export const FinalPrice = ({ hotel }) => {
         </span>
       </div>
       <div className="d-flex direction-column">
-        <div className="grid-container-two-col selected-dates">
+        <div className="selected-dates">
           <div className="checkin loc-container">
             <label htmlFor="">Check In</label>
             <DateSelector checkInType="in" />
@@ -43,7 +48,6 @@ export const FinalPrice = ({ hotel }) => {
           <div className="checkin loc-container">
             <label htmlFor="">Check Out</label>
             <DateSelector checkInType="out" />
-            {/* <p>{checkOutDate}</p> */}
           </div>
         </div>
         <div className="data gutter-sm guests">
@@ -72,8 +76,10 @@ export const FinalPrice = ({ hotel }) => {
       </div>
       <div className="price-distribution d-flex direction-column">
         <div className="final-price d-flex align-center justify-space-between">
-          <span className="span">Rs. {price} x 2 nights</span>
-          <span className="span">Rs. {price * 2}</span>
+          <span className="span">
+            Rs. {price} x {numberOfNights} nights
+          </span>
+          <span className="span">Rs. {price * numberOfNights}</span>
         </div>
         <div className="final-price d-flex align-center justify-space-between">
           <span className="span">Service charge</span>
@@ -81,7 +87,7 @@ export const FinalPrice = ({ hotel }) => {
         </div>
         <div className="final-price d-flex align-center justify-space-between">
           <span className="span">Total</span>
-          <span className="span">Rs.{price * 2 + 150}</span>
+          <span className="span">Rs.{price * numberOfNights + 150}</span>
         </div>
       </div>
     </div>

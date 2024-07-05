@@ -1,10 +1,12 @@
 .price-details-container {
     align-self: flex-start;
     background-color: var(--background-color);
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
     width: 25rem;
     margin-left: auto;
     margin-top: 2rem;
+    overflow: hidden;
+    border-top: 4px solid orangered;
   }
   
   .guests {
@@ -44,4 +46,31 @@
   
   .guest-count-input:focus {
     outline: none;
+  }
+
+  .selected-dates{
+    display: flex;
+    padding-left: 60px;
+    overflow: hidden;
+    gap:10px
+  
+  }
+
+  .checkin{
+    max-width: 50%;
+    display:flex;
+    flex-direction: column;
+
+  }
+
+
+  @media (max-width:763px) {
+    .price-details-container{
+      width:100%;
+      border-top: 4px solid orangered;
+    }
+
+    .selected-dates{
+      padding-left: 10px;
+    }
   }

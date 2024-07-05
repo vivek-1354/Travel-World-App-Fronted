@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useAuth } from "../../context";
 import {
   validateEmail,
   validateName,
@@ -8,9 +7,11 @@ import {
 } from "../../utils";
 import "./Auth.css";
 import { signupHandler } from "../../services";
+import { useDispatch } from "react-redux";
+import { clearUserInfo, handleLogin } from "../../Redux/actions/authActions";
 
 export const AuthSignup = () => {
-  const { authState, authDispatch } = useAuth();
+  const dispatch = useDispatch();
 
   const number = useRef();
   const username = useRef();
@@ -20,7 +21,7 @@ export const AuthSignup = () => {
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    console.log(password.current.value);
+
     const data = {
       number: number.current.value,
       username: username.current.value,
@@ -29,14 +30,7 @@ export const AuthSignup = () => {
       confirmPassword: confirmPassword.current.value,
     };
 
-    authDispatch({
-      type: "HANDLE_LOGIN",
-    });
-
-    authDispatch({
-      type: "ADD_USER_INFO",
-      payload: data,
-    });
+    dispatch(handleLogin());
 
     const isValidNumber = validateNumber(data.number);
     const isValidName = validateName(data.username);
@@ -53,13 +47,8 @@ export const AuthSignup = () => {
       isValidConfirmPassword
     ) {
       signupHandler(data.username, data.number, data.email, data.password);
-      authDispatch({
-        type: "CLEAR_USER_INFO",
-      });
+      dispatch(clearUserInfo());
     }
-
-    console.log(data);
-    console.log(authState);
   };
 
   return (
@@ -76,7 +65,6 @@ export const AuthSignup = () => {
             placeholder="Enter mobile number"
             required
             ref={number}
-            // autoComplete="on"
           />
         </div>
         <div className="d-flex direction-column lb-in-container">

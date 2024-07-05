@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { HotelCard, Navbar } from "../../components";
-import { useWishlist } from "../../context";
 import "./Wishlist.css";
+import { useSelector } from "react-redux";
 
 export const Wishlist = () => {
   const [wishlist, setWishlist] = useState();
-  const { wishlistState } = useWishlist();
+  const wishlistState = useSelector((state) => state.wishlistReducer);
 
   useEffect(() => {
     setWishlist(wishlistState.wishlist);

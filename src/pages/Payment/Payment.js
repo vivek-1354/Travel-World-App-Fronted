@@ -1,20 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Payment.css";
-import { useDate } from "../../context";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const Payment = () => {
-  const { Datestate } = useDate();
+  const dateState = useSelector((state) => state.dateReducer);
   const [hotel, setHotel] = useState([]);
   const params = useParams();
+  const navigate = useNavigate();
   const { id } = params;
-
-  //   useEffect(() => {
-  //     fetch(`http://localhost:8000/api/singlehotel/${id}`)
-  //       .then((res) => res.json())
-  //       .then((data) => setHotel(data));
-  //   }, [id]);
 
   useEffect(() => {
     (async () => {
@@ -23,7 +18,6 @@ export const Payment = () => {
           `http://localhost:8000/api/singlehotel/${id}`
         );
         setHotel(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -32,7 +26,7 @@ export const Payment = () => {
 
   const { image, name, address, rating, price, state } = hotel;
 
-  const { checkInDate, checkOutDate, guests } = Datestate;
+  const { checkInDate, checkOutDate, guests } = dateState;
   const numberOfNights =
     checkInDate && checkOutDate
       ? (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 3600 * 24)
@@ -83,10 +77,13 @@ export const Payment = () => {
             </div>
           </div>
           <div className="d-flex direction-column gap-sm">
-            <h3>Pay with</h3>
-            <div>Razorpay</div>
+            <h3 className="pay-with">Pay with</h3>
+            <div className="razorpay">Razorpay</div>
           </div>
-          <button className="button btn-primary btn-reserve cursor btn-pay">
+          <button
+            className="button btn-primary btn-reserve cursor btn-pay"
+            onClick={() => navigate("/booking/successful")}
+          >
             Confirm Booking
           </button>
         </div>

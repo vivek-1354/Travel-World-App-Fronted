@@ -6,3 +6,22 @@
     font-size: 1.5rem;
     padding-bottom: 8px;
   }
+
+.final-detail {
+  display: flex;
+  border-bottom: 10px solid orangered;
+  border-radius: 5%;
+  overflow: hidden;
+  padding : 0px 20px;
+}
+
+@media (max-width : 763px) {
+  .single-hotel-page {
+    padding: 12rem 4rem 2rem 4rem;
+  }
+
+  .final-detail {
+    flex-direction: column;
+
+  }
+}

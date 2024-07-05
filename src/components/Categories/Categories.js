@@ -47,16 +47,16 @@ export const Categories = () => {
   return (
     <section className="categories d-flex align-items-center gap-large cursor-pointer shadow">
       {numberOfCategoryToShow >= 10 && (
-        <button onClick={handleShowMoreLeftClick}>
-          <span className="material-symbols-outlined">chevron_left</span>
-        </button>
+        <span onClick={handleShowMoreLeftClick}>
+          <span className=" arrow material-symbols-outlined">chevron_left</span>
+        </span>
       )}
 
       {categories &&
         categories.map((category) => {
           return (
             <span
-              className={`${
+              className={`category ${
                 category.category === hotelCategory?.category
                   ? "border-bottom"
                   : ""
@@ -69,9 +69,11 @@ export const Categories = () => {
           );
         })}
       {numberOfCategoryToShow - 10 < categories.length && (
-        <button onClick={handleShowMoreRightClick}>
-          <span className="material-symbols-outlined">chevron_right</span>
-        </button>
+        <span onClick={handleShowMoreRightClick}>
+          <span className=" arrow material-symbols-outlined">
+            chevron_right
+          </span>
+        </span>
       )}
       <button
         className="button btn-filter d-flex align-center gap-small cursor-pointer"

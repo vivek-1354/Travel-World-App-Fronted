@@ -38,7 +38,7 @@ export const handleDateFocus = () => {
   };
 };
 
-export const handleDestinationFocus = () => {
+export const handleSetDestinationFocus = () => {
   return {
     type: "DESTINATION_FOCUS",
   };

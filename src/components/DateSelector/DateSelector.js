@@ -1,32 +1,36 @@
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.module.css";
 
 import "./DateSelector.css";
-import { useDate } from "../../context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  handleCheckin,
+  handleCheckout,
+  handleDateFocus,
+} from "../../Redux/actions/dateActions";
 
 export const DateSelector = ({ checkInType }) => {
-  const { Datestate, dateDispatch } = useDate();
+  const dispatch = useDispatch();
+  const dateState = useSelector((state) => state.dateReducer);
+  const { checkInDate, checkOutDate } = dateState;
 
   const handleDateChange = (date) => {
-    dateDispatch({
-      type: checkInType === "in" ? "CHECK_IN" : "CHECK_OUT",
-      payload: date,
-    });
-    // console.log(date)
+    const type = checkInType === "in" ? "CHECK_IN" : "CHECK_OUT";
+    type === "CHECK_IN"
+      ? dispatch(handleCheckin(date))
+      : dispatch(handleCheckout(date));
   };
 
-  const handleDateFocus = () => {
-    dateDispatch({ type: "DATE_FOCUS" });
+  const handleDateFocusClick = () => {
+    dispatch(handleDateFocus());
   };
 
   return (
     <DatePicker
-      className="search-dest input"
+      className="search-dest input datee"
       onChange={(date) => handleDateChange(date)}
-      selected={
-        checkInType === "in" ? Datestate.checkInDate : Datestate.checkOutDate
-      }
-      onFocus={handleDateFocus}
+      selected={checkInType === "in" ? checkInDate : checkOutDate}
+      onFocus={handleDateFocusClick}
       dateFormat="dd/MM/yyyy"
       placeholderText={"Add Dates"}
       closeOnScroll={true}

@@ -1,18 +1,15 @@
 import "./MenuModal.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useDispatch } from "react-redux";
+import { handleLogout, openMenuModal } from "../../Redux/actions/authActions";
 
 export const MenuModal = () => {
-  const { authDispatch } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    authDispatch({
-      type: "LOGOUT",
-    });
-    authDispatch({
-      type: "OPEN_MENU_MODAL",
-    });
+    dispatch(handleLogout());
+    dispatch(openMenuModal());
     navigate("/");
   };
   return (

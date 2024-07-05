@@ -2,13 +2,18 @@ import { useRef } from "react";
 import "./Auth.css";
 import { loginHandler } from "../../services";
 import { validateNumber, validatePassword } from "../../utils";
-import { useAuth } from "../../context";
+import { useDispatch } from "react-redux";
+import {
+  handleSingup,
+  openAuthModal,
+  setAccessToken,
+  setUserName,
+} from "../../Redux/actions/authActions";
 
 export const AuthLogin = () => {
+  const dispatch = useDispatch();
   const number = useRef(8210651798);
   const password = useRef("Viv@123");
-
-  const { authDispatch } = useAuth();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,17 +29,10 @@ export const AuthLogin = () => {
       loginHandler(data.number, data.password).then((res) => {
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("accessToken", res.data.accessToken);
-        authDispatch({
-          type: "SET_USER_NAME",
-          payload: res.data.username,
-        });
-        authDispatch({
-          type: "SET_ACCESS_TOKEN",
-          payload: res.data.accessToken,
-        });
-        authDispatch({
-          type: "OPEN_AUTH_MODAL",
-        });
+
+        dispatch(setUserName(res.data.username));
+        dispatch(setAccessToken(res.data.accessToken));
+        dispatch(openAuthModal());
       });
     }
   };
@@ -51,25 +49,16 @@ export const AuthLogin = () => {
       loginHandler(data.number, data.password).then((res) => {
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("accessToken", res.data.accessToken);
-        authDispatch({
-          type: "SET_USER_NAME",
-          payload: res.data.username,
-        });
-        authDispatch({
-          type: "SET_ACCESS_TOKEN",
-          payload: res.data.accessToken,
-        });
-        authDispatch({
-          type: "OPEN_AUTH_MODAL",
-        });
+
+        dispatch(setUserName(res.data.username));
+        dispatch(setAccessToken(res.data.accessToken));
+        dispatch(openAuthModal());
       });
     }
   };
 
   const handleCreateNewAccount = () => {
-    authDispatch({
-      type: "HANDLE_SIGNUP",
-    });
+    dispatch(handleSingup());
   };
   return (
     <div className="auth-container">
@@ -79,7 +68,6 @@ export const AuthLogin = () => {
             Mobile Number <span className="asterisk">*</span>
           </label>
           <input
-            // type="number"
             className="auth-input"
             maxLength="10"
             placeholder="Enter Mobile Number"
@@ -94,7 +82,6 @@ export const AuthLogin = () => {
           <input
             type="password"
             className="auth-input"
-            // maxLength="10"
             placeholder="Enter Password"
             required
             ref={password}

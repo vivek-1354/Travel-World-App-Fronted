@@ -1,16 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./HotelCard.css";
-import { useAuth, useWishlist } from "../../context";
 import { findHotelInWishlist } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { openAuthModal } from "../../Redux/actions/authActions";
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from "../../Redux/actions/wishlistActions";
 
 export const HotelCard = ({ hotel }) => {
   const [isSelected, setIsSelected] = React.useState(false);
-
-  const { authState, authDispatch } = useAuth();
   const navigate = useNavigate();
 
-  const { wishlistState, wishlistDispatch } = useWishlist();
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.authReducer);
+  const { accessToken } = authState;
+
+  const wishlistState = useSelector((state) => state.wishlistReducer);
 
   const isHotelInWishList = findHotelInWishlist(
     wishlistState.wishlist,
@@ -24,16 +31,15 @@ export const HotelCard = ({ hotel }) => {
   };
 
   const handleWishlistClick = () => {
-    if (authState.accessToken) {
+    if (accessToken) {
       if (!isHotelInWishList) {
-        wishlistDispatch({ type: "ADD_TO_WISHLIST", payload: hotel });
-      } else if (isSelected) {
-        wishlistDispatch({ type: "REMOVE_FRON_WISHLIST", payload: hotel._id });
+        dispatch(addToWishlist(hotel));
+      }
+      if (isSelected) {
+        dispatch(deleteFromWishlist(hotel._id));
       }
     } else {
-      authDispatch({
-        type: "OPEN_AUTH_MODAL",
-      });
+      dispatch(openAuthModal());
     }
   };
 

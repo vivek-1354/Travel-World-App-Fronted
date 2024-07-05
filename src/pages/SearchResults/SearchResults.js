@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { HotelCard, Navbar } from "../../components";
-import { useDate } from "../../context";
+import {
+  HotelCard,
+  Navbar,
+  SearchStayWithDate,
+  AuthModal,
+  MenuModal,
+} from "../../components";
 import "./SearchResult.css";
+import { useSelector } from "react-redux";
 
 export const SearchResults = () => {
-  const { Datestate } = useDate();
-  const { destination } = Datestate;
+  const dateState = useSelector((state) => state.dateReducer);
+  const authState = useSelector((state) => state.authReducer);
+
+  const { destination } = dateState;
   const [hotels, setHotels] = useState();
 
   useEffect(() => {
     (async () => {
       const response = await axios.get(`http://localhost:8000/api/hotels`);
       setHotels(response.data);
-      // console.log(response.data)
     })();
   }, []);
 
@@ -24,7 +31,7 @@ export const SearchResults = () => {
       city.toLowerCase() === destination.toLowerCase() ||
       country.toLowerCase() === destination.toLowerCase()
   );
-  console.log(filteredHotels?.length);
+
   return (
     <>
       <Navbar />
@@ -35,6 +42,9 @@ export const SearchResults = () => {
           <h3>Nothing Found.</h3>
         )}
       </section>
+      {dateState.isSearchModalOpen && <SearchStayWithDate />}
+      {authState.isAuthModalOpen && <AuthModal />}
+      {authState.isMenuModalOpen && <MenuModal />}
     </>
   );
 };

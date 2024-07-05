@@ -21,4 +21,6 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--background-color);
+  box-sizing: border-box;
+  min-width: 365px;
 }

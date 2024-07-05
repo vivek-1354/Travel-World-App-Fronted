@@ -33,13 +33,15 @@ export const clearUserInfo = () => {
   };
 };
 
-export const setUserName = () => {
+export const setUserName = (name) => {
   return {
     type: "SET_USER_NAME",
+    payload: name,
   };
 };
-export const setAccessToken = () => {
+export const setAccessToken = (token) => {
   return {
     type: "SET_ACCESS_TOKEN",
+    payload: token,
   };
 };

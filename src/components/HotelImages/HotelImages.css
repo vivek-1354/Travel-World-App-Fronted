@@ -1,5 +1,8 @@
 .hotel-image-container {
-    height: 25rem;
+    height: 35rem;
+    display: flex;
+    gap:8px;
+    overflow: hidden;
   }
   
   .primary-image-container {
@@ -7,7 +10,7 @@
   }
   
   .hotel-img {
-    width: 20vw;
+    width: 21.95vw;
     height: 50%;
   }
   
@@ -15,7 +18,32 @@
     width: 40vw;
     height: 100%;
   }
-  
-  .gap-small {
+
+  .sub-img{
+    display:flex;
+    flex-wrap :wrap;
     gap: 8px;
   }
+
+@media (max-width:763px) {
+  .primary-img {
+    width: 100vw;
+  }
+
+  .hotel-img {
+    width: 100vw;
+  }
+
+  .hotel-image-container {
+    height: fit-content;
+    flex-direction: column;
+    gap:15px;
+    overflow: hidden;
+  }
+
+  .sub-img {
+    gap:23px;
+  }
+ 
+}
+

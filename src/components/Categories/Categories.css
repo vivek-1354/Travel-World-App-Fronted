@@ -1,5 +1,5 @@
 .categories {
-    padding: 6rem 3rem 1rem 5rem;
+    padding: 6rem 3rem .5rem 5rem;
     color: var(--text-color-primary);
     background-color: var(--background-color);
     position: fixed;
@@ -13,13 +13,6 @@
     gap: 2rem;
   }
   
-  .rec.rec-swipable{
-    gap: 1.5rem;
-  }
-  
-  .rec.rec-item-wrapper {
-    width: max-content !important;
-  }
   
   .category-color {
     background-color: var(--primary-color);
@@ -35,6 +28,7 @@
   
   .border-bottom {
     border-bottom: 2px solid var(--text-color-primary);
+    color:#FF6525
   }
   
   .button.btn-filter {
@@ -47,16 +41,27 @@
   .btn-filter:hover,
   .btn-category:hover {
     box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.1);
+    color:#FF6525
   }
   
-  .rec.rec-arrow:disabled {
-    visibility: hidden;
+
+  .arrow{
+    background-color :#FF6525;
+    border-radius: 50%;
+    padding :1px;
+    font-size : bolder;
+    color: #fff;
   }
-  
-  .rec.rec-arrow {
-    width: 1.5rem;
-    height: 1.5rem;
-    min-width: 1.5rem;
-    line-height: 1.5rem;
-    font-size: 1rem;
+
+  .category:hover {
+    color:#FF6525
+
+  }
+
+
+  @media (max-width: 763px){
+    .categories{
+      display: none;
+
+    }
   }
