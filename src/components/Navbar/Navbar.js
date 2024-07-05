@@ -3,10 +3,15 @@ import "./Navbar.css";
 import { useAuth, useDate } from "../../context";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { openAuthModal } from "../../Redux/actions/authActions";
+
 export const Navbar = () => {
   const navigate = useNavigate();
   const { authState, authDispatch } = useAuth();
   const { Datestate, dateDispatch } = useDate();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.authReducer);
   const { destination, checkInDate, checkOutDate, guests } = Datestate;
 
   const handleSearchClick = () => {
@@ -19,9 +24,10 @@ export const Navbar = () => {
         type: "OPEN_MENU_MODAL",
       });
     } else {
-      authDispatch({
-        type: "OPEN_AUTH_MODAL",
-      });
+      // authDispatch({
+      //   type: "OPEN_AUTH_MODAL",
+      // });
+      dispatch(openAuthModal());
     }
   };
 

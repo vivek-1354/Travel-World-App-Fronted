@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import {
   AuthModal,
@@ -30,6 +31,9 @@ export const Home = () => {
   const { Datestate } = useDate();
   const { filterState } = useFilter();
   const { authState } = useAuth();
+  const state = useSelector((stat) => stat.authReducer);
+
+  console.log(state.isAuthModalOpen);
 
   const {
     priceRange,
@@ -120,7 +124,8 @@ export const Home = () => {
       )}
       {Datestate.isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
-      {authState.isAuthModalOpen && <AuthModal />}
+      {/* {authState.isAuthModalOpen && <AuthModal />} */}
+      {state.isAuthModalOpen && <AuthModal />}
       {authState.isMenuModalOpen && <MenuModal />}
     </>
   );

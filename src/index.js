@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import state from "./Redux/reduxStore";
 import "./index.css";
 import App from "./App";
 import {
@@ -20,7 +22,9 @@ root.render(
           <FilterContextProvider>
             <AuthContextProvider>
               <WishlistProvider>
-                <App />
+                <Provider store={state}>
+                  <App />
+                </Provider>
               </WishlistProvider>
             </AuthContextProvider>
           </FilterContextProvider>
