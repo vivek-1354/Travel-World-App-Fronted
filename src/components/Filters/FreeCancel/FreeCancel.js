@@ -1,30 +1,31 @@
-import { useFilter } from '../../../context'
-import '../Filter.css'
-import './FreeCancel.css'
+import { useDispatch, useSelector } from "react-redux";
+import "../Filter.css";
+import "./FreeCancel.css";
+import { setFreeCancel } from "../../../Redux/actions/filterActions";
 
 export const FreeCancel = () => {
+  // const { filterState, filterDispatch } = useFilter()
+  const dispatch = useDispatch();
+  const filterState = useSelector((state) => state.filterReducer);
 
-    const { filterState, filterDispatch } = useFilter()
+  const { isCancelable } = filterState;
 
-    const { isCancelable } = filterState
+  const handleCancelChange = (e) => {
+    dispatch(setFreeCancel(e.target.checked));
+  };
 
-    console.log(isCancelable)
-    const handleCancelChange = (e) => {
-        filterDispatch({
-            type: 'FREE_CANCEL',
-            payload: e.target.checked // true or false
-        })
-    }
-
-    return (
-        <div className='filter-container'>
-            <div className="d-flex align-center gap-larger">
-                <span className="filter-label">Free Cancelation</span>
-                <label htmlFor="" className="slide">
-                    <input type="checkbox" onChange={handleCancelChange} checked={isCancelable} />
-                </label>
-            </div>
-
-        </div>
-    )
-}
+  return (
+    <div className="filter-container">
+      <div className="d-flex align-center gap-larger">
+        <span className="filter-label">Free Cancelation</span>
+        <label htmlFor="" className="slide">
+          <input
+            type="checkbox"
+            onChange={handleCancelChange}
+            checked={isCancelable}
+          />
+        </label>
+      </div>
+    </div>
+  );
+};
