@@ -1,40 +1,33 @@
 import React from "react";
 import "./Navbar.css";
-import { useAuth, useDate } from "../../context";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openAuthModal } from "../../Redux/actions/authActions";
+import {
+  openAuthModal,
+  openMenuModal,
+  handleLogout,
+} from "../../Redux/actions/authActions";
+import { openSearchModal } from "../../Redux/actions/dateActions";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const { authState, authDispatch } = useAuth();
-  const { Datestate, dateDispatch } = useDate();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.authReducer);
-  const { destination, checkInDate, checkOutDate, guests } = Datestate;
+  const authState = useSelector((state) => state.authReducer);
+  const dateState = useSelector((state) => state.dateReducer);
+  const { username, accessToken } = authState;
+  const { destination, checkInDate, checkOutDate, guests } = dateState;
 
   const handleSearchClick = () => {
-    dateDispatch({ type: "OPEN_SEARCH_MODAL" });
+    dispatch(openSearchModal());
   };
 
   const handleAuthClick = () => {
-    if (authState.accessToken) {
-      authDispatch({
-        type: "OPEN_MENU_MODAL",
-      });
+    if (accessToken) {
+      dispatch(openMenuModal());
     } else {
-      // authDispatch({
-      //   type: "OPEN_AUTH_MODAL",
-      // });
       dispatch(openAuthModal());
     }
-  };
-
-  const handleMenuClick = () => {
-    // authDispatch({
-    //   type: "OPEN_AUTH_MODAL",
-    // });
   };
 
   const handleWishlistClick = () => {
@@ -45,9 +38,7 @@ export const Navbar = () => {
     navigate("/");
   };
   const handleLogoutClick = () => {
-    authDispatch({
-      type: "LOGOUT",
-    });
+    dispatch(handleLogout());
     navigate("/");
   };
 
@@ -94,10 +85,10 @@ export const Navbar = () => {
         <span className="search material-symbols-outlined">search</span>
       </div>
       <nav className="d-flex align-center gap-large">
-        {authState.accessToken && (
-          <strong style={{ color: "black" }}>Hi, {authState.username}</strong>
+        {accessToken && (
+          <strong style={{ color: "black" }}>Hi, {username}</strong>
         )}
-        {authState.accessToken && (
+        {accessToken && (
           <span onClick={handleHomeClick} className="menu-icons">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +101,7 @@ export const Navbar = () => {
             </svg>
           </span>
         )}
-        {authState.accessToken && (
+        {accessToken && (
           <span onClick={handleWishlistClick} className="menu-icons">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +114,7 @@ export const Navbar = () => {
             </svg>
           </span>
         )}
-        {authState.accessToken && (
+        {accessToken && (
           <span onClick={handleLogoutClick} className="menu-icons">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +136,7 @@ export const Navbar = () => {
           </span>
           <span
             className="material-symbols-outlined profile-option person"
-            onClick={handleMenuClick}
+            onClick={handleAuthClick}
           >
             person
           </span>

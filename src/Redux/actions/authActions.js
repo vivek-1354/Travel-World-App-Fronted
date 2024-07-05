@@ -4,9 +4,9 @@ export const openAuthModal = () => {
   };
 };
 
-export const closeAuthModal = () => {
+export const openMenuModal = () => {
   return {
-    type: "HANDLE_AUTH_MODAL",
+    type: "HANDLE_MENU_MODAL",
   };
 };
 

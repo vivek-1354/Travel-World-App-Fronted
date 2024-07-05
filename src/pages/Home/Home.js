@@ -12,7 +12,7 @@ import {
   Navbar,
   SearchStayWithDate,
 } from "../../components";
-import { useAuth, useCategory, useDate, useFilter } from "../../context";
+import { useCategory, useFilter } from "../../context";
 import "./Home.css";
 import {
   getHotelByPrice,
@@ -28,12 +28,9 @@ export const Home = () => {
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
   const { hotelCategory } = useCategory();
-  const { Datestate } = useDate();
   const { filterState } = useFilter();
-  const { authState } = useAuth();
-  const state = useSelector((stat) => stat.authReducer);
-
-  console.log(state.isAuthModalOpen);
+  const authState = useSelector((state) => state.authReducer);
+  const dateState = useSelector((state) => state.dateReducer);
 
   const {
     priceRange,
@@ -72,12 +69,6 @@ export const Home = () => {
       }
     }, 1000);
   };
-
-  // const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange)
-  // const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(hotels, noOfBathrooms, noOfBeds, noOfBedrooms)
-  // const filteredHotelsByPropertyType = getHotelsByPropertyType(hotels, propertyType)
-  // const filteredHotelsByRatings = getHotelsByRatings(hotels, noOfRatings)
-  // const filteredHotelsByFreeCancel = getHotelsByFreeCancel(hotels, isCancelable )
 
   const filteredHotelsByPrice = getHotelByPrice(hotels, priceRange);
   const filteredHotelsByRoomsAndBeds = getHotelByRoomsAndBeds(
@@ -122,10 +113,9 @@ export const Home = () => {
       ) : (
         <></>
       )}
-      {Datestate.isSearchModalOpen && <SearchStayWithDate />}
+      {dateState.isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
-      {/* {authState.isAuthModalOpen && <AuthModal />} */}
-      {state.isAuthModalOpen && <AuthModal />}
+      {authState.isAuthModalOpen && <AuthModal />}
       {authState.isMenuModalOpen && <MenuModal />}
     </>
   );

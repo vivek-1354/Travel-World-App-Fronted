@@ -8,50 +8,42 @@ const initialState = {
 };
 
 const dateReducer = (state = initialState, action) => {
-  let newState;
   switch (action.type) {
     case "OPEN_SEARCH_MODAL":
-      newState = {
+      return {
         ...state,
         isSearchModalOpen: !state.isSearchModalOpen,
       };
-      return newState;
     case "CHECK_IN":
-      newState = {
+      return {
         ...state,
         checkInDate: action.payload,
       };
-      return newState;
     case "CHECK_OUT":
-      newState = {
+      return {
         ...state,
         checkOutDate: action.payload,
       };
-      return newState;
     case "SET_DESTINATION":
-      newState = {
+      return {
         ...state,
         destination: action.payload,
       };
-      return newState;
     case "SET_GUESTS":
-      newState = {
+      return {
         ...state,
         guests: action.payload,
       };
-      return newState;
     case "DATE_FOCUS":
-      newState = {
+      return {
         ...state,
         isSearchResultOpen: false,
       };
-      return newState;
     case "DESTINATION_FOCUS":
-      newState = {
+      return {
         ...state,
         isSearchResultOpen: true,
       };
-      return newState;
     default:
       return state;
   }
