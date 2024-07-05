@@ -12,7 +12,6 @@ import {
   Navbar,
   SearchStayWithDate,
 } from "../../components";
-import { useCategory, useFilter } from "../../context";
 import "./Home.css";
 import {
   getHotelByPrice,
@@ -27,10 +26,11 @@ export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(15);
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
-  const { hotelCategory } = useCategory();
-  const { filterState } = useFilter();
+
+  const filterState = useSelector((state) => state.filterReducer);
   const authState = useSelector((state) => state.authReducer);
   const dateState = useSelector((state) => state.dateReducer);
+  const hotelCategory = useSelector((state) => state.categoryReducer);
 
   const {
     priceRange,
@@ -46,12 +46,12 @@ export const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `http://localhost:8000/api/hotels?category=${hotelCategory}`
+        `http://localhost:8000/api/hotels?category=${hotelCategory?.category}`
       );
       setTestData(response.data);
       setHotels(response.data ? response.data.slice(0, currentIndex) : []);
     })();
-  }, [hotelCategory, currentIndex]);
+  }, [hotelCategory?.category, currentIndex]);
 
   const fetchMoreData = () => {
     if (hotels.length === testData.length) {
