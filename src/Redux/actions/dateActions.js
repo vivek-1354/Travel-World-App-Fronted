@@ -4,7 +4,7 @@ export const openSearchModal = () => {
   };
 };
 
-export const hancleCheckin = (date) => {
+export const handleCheckin = (date) => {
   return {
     type: "CHECK_IN",
     payload: date,
