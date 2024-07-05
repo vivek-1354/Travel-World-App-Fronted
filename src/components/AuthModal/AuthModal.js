@@ -1,25 +1,26 @@
 import { AuthLogin, AuthSignup } from "../index";
 import "./AuthModal.css";
-import { useAuth } from "../../context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openAuthModal,
+  handleLogin,
+  handleSingup,
+} from "../../Redux/actions/authActions";
 
 export const AuthModal = () => {
-  const { authState, authDispatch } = useAuth();
+  const authState = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
 
   const handleLoginClick = () => {
-    authDispatch({
-      type: "HANDLE_LOGIN",
-    });
+    dispatch(handleLogin());
   };
+
   const handleSignupClick = () => {
-    authDispatch({
-      type: "HANDLE_SIGNUP",
-    });
+    dispatch(handleSingup());
   };
 
   const handleCloseClick = () => {
-    authDispatch({
-      type: "OPEN_AUTH_MODAL",
-    });
+    dispatch(openAuthModal());
   };
 
   return (
