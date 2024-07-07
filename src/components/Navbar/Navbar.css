@@ -1,7 +1,7 @@
 .heading {
   display: flex;
   align-items: center;
-    background-color: var(--background-color);
+    background-color: rgb(63, 73, 25);
     padding: 8px 3rem;
     border-bottom: 1px solid var(--accent-color);
     justify-content: space-between;
@@ -11,31 +11,36 @@
   }
   
   .heading-title {
-    font-size: 1.75rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     padding: 0;
   }
   
-  .nav {
-    border: 1px solid var(--container-border-color);
-    border-radius: 4px;
+  .menu:hover , .person:hover{
+    box-shadow: 1px 1px 2px 2px rgb(209, 199, 199);
   }
   
-  .nav:hover {
-    box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.1);
-}
-
-.menu-icons:hover {
-  /* display: flex;
-  align-items: center;
-  border: 1px solid orange;
-  border-radius: 50%;
-  background-color: #FF6525; */
+  .menu-icons:hover {
   cursor: pointer;
-  border-radius: 50%;
-  background-color: rgb(218, 211, 211);
-
+  color:black;
 }
+
+.menu-icons{
+  font-size: 30px;
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.search-icon{
+  display: none;
+}
+
+.countt{
+  position: absolute;
+  bottom:20px;
+}
+
 
 
 .form-container {
@@ -64,37 +69,168 @@
     border-radius: 0 4px 4px 0;
     color:#fff;
   }
+
+  .nav{
+    gap:5px
+  }
   
   .profile-option {
-    color: var(--text-color-primary);
+    color: white;
     font-size: 2.5rem;
   }
   
+  .profile-option:hover{
+    color: black
+  }
+
   .menu {
-    border-right: 1px solid var(--accent-color);
+    border-right: 1px solid  rgb(63, 73, 25);
+    background-color: var(--primary-color);
     height:70%;
   }
   
-  .person {
-    background-color: var(--accent-color);
-    border-radius: 0 4px 4px 0;
+  .person, .menu {
+    background-color: var(--primary-color);
+    border-radius: 4px 4px 4px 4px;
   }
   
   .cursor-pointer:hover {
     cursor: pointer;
   }
 
-  .search:hover{
+  .search:hover, .menu-search:hover{
     color:black
   }
 
-  @media (max-width: 763px){
-
-    .heading{
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      gap:10px;
-
-    }
+  .logo{
+    width : 60px;
+    height : 60px;
   }
+  
+  .link{
+    text-decoration:none
+  }
+
+.name{
+  display: flex;
+  align-items: center;
+  max-width: 200px;
+}
+
+.menu-search {
+  display: none;
+}
+
+.nav-menu{
+  border-radius: 4px 4px 4px 4px;
+  gap: 20px;
+  position: relative;
+}
+
+.countt {
+  font-size: .875rem;
+  color: red;
+  font-weight: 100;
+}
+.username{
+  font-size: 1.5rem;
+  color:white;
+  font-weight: bolder;
+  border: 2px solid var(--primary-color);
+  padding :2px 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color)
+
+}
+
+
+  @media (max-width: 763px){
+    .heading{
+      padding: 5px 1rem;
+    }
+    .nav{
+      flex-direction: row-reverse;
+      gap:5px;
+  }
+
+  .person{
+    display:none;
+  }
+
+  .menu-search{
+    /* display: block; */
+    height :40px;
+    width : 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px 4px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .menu-search:hover{
+    box-shadow: 1px 1px 2px 2px rgb(209, 199, 199);
+  }
+
+  .menu-icons {
+    font-size: 25px;
+  }
+  .username {
+    font-size: .875rem;
+    color: white;
+    padding: 2px 7px;
+    position: relative;
+    top:-5px;
+    font-weight: bolder;
+  }
+
+  .logo {
+    width:40px;
+    height:50px;
+  }
+  .brand{
+    font-size: 2rem;
+  }
+
+  .form-container{
+    display: none;
+  }
+  .nav-menu{
+    gap:5px;
+    /* border:1px solid blue */
+  }
+
+  .search-icon{
+    display: block;
+  }
+}
+
+
+@media (max-width:1000px) {
+  .form-container{
+    display: none;
+  }
+  .search-icon{
+    display: block;
+  }
+  .menu-search{
+    /* display: block; */
+    height :40px;
+    width : 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px 4px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .nav{
+    flex-direction: row-reverse;
+    gap:5px;}
+
+  
+}
