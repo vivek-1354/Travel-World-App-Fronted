@@ -43,6 +43,14 @@ export const Navbar = () => {
     navigate("/");
   };
 
+  const handleMenuClick = () => {
+    if (accessToken) {
+      dispatch(openMenuModal());
+    } else {
+      dispatch(openAuthModal());
+    }
+  };
+
   return (
     <header className="heading">
       <div className="name">
@@ -69,7 +77,7 @@ export const Navbar = () => {
       </div>
 
       <div
-        className="form-container d-flex align-center cursor-pointer"
+        className="form-container align-center cursor-pointer"
         onClick={handleSearchClick}
       >
         <span className="form-option">{destination || "Any Where"}</span>
@@ -102,14 +110,6 @@ export const Navbar = () => {
         )}
         {accessToken && (
           <span
-            onClick={handleHomeClick}
-            className="menu-icons material-symbols-outlined"
-          >
-            home
-          </span>
-        )}
-        {accessToken && (
-          <span
             onClick={handleWishlistClick}
             className="menu-icons material-symbols-outlined"
           >
@@ -121,30 +121,38 @@ export const Navbar = () => {
             </span>
           </span>
         )}
-        {accessToken && (
+        {/* {accessToken && (
           <span
             onClick={handleLogoutClick}
             className="menu-icons material-symbols-outlined"
           >
             logout
           </span>
-        )}
+        )} */}
         {accessToken && (
-          <strong className="username">{username[0].toUpperCase()}</strong>
+          <strong className="username" onClick={handleMenuClick}>
+            {username[0].toUpperCase()}
+          </strong>
         )}
         {!accessToken && (
           <div className="nav d-flex align-center cursor-pointer">
-            <span
+            {/* <span
               className="material-symbols-outlined profile-option menu"
               onClick={handleAuthClick}
             >
               menu
-            </span>
+            </span> */}
             <span
               className="material-symbols-outlined profile-option person"
               onClick={handleAuthClick}
             >
               person
+            </span>
+            <span
+              className="material-symbols-outlined profile-option menu"
+              onClick={handleMenuClick}
+            >
+              menu
             </span>
             <span
               className="menu-search material-symbols-outlined"

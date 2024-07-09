@@ -18,7 +18,7 @@ export const SingleHotel = () => {
   const authState = useSelector((state) => state.authReducer);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/singlehotel/${id}`)
+    fetch(`/api/singlehotel/${id}`)
       .then((res) => res.json())
       .then((data) => setHotel(data));
   }, [id]);
