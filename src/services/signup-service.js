@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const signupHandler = async (username, number, email, password) => {
   try {
-    const data = axios.post("http://localhost:8000/api/auth/register", {
+    const data = axios.post("/api/auth/register", {
       username: username,
       number: Number(number),
       email: email,
