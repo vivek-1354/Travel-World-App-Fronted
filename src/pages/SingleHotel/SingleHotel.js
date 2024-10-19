@@ -9,7 +9,7 @@ export const SingleHotel = () => {
     const [hotel, setHotel] = useState();
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/singlehotel/${id}`)
+        fetch(`/api/singlehotel/${id}`)
             .then(res => res.json())
             .then(data => setHotel(data))
     }, [id])
