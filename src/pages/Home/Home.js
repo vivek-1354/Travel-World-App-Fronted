@@ -45,7 +45,7 @@ export const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `http://localhost:8000/api/hotels?category=${hotelCategory}`
+        `/api/hotels?category=${hotelCategory}`
       );
       setTestData(response.data);
       setHotels(response.data ? response.data.slice(0, currentIndex) : []);
