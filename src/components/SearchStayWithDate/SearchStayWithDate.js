@@ -16,7 +16,7 @@ export const SearchStayWithDate = () => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `http://localhost:8000/api/hotels?category=${hotelCategory}`
+        `${process.env.REACT_APP_BACKEND_API}/hotels?category=${hotelCategory}`
       );
       setHotels(response.data);
     })();

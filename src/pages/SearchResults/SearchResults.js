@@ -11,7 +11,9 @@ export const SearchResults = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(`/api/hotels`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_API}/hotels`
+      );
       setHotels(response.data);
       // console.log(response.data)
     })();

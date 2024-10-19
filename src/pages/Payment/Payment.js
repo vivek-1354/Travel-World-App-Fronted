@@ -20,7 +20,7 @@ export const Payment = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `/api/singlehotel/${id}`
+          `${process.env.REACT_APP_BACKEND_API}/singlehotel/${id}`
         );
         setHotel(data);
         console.log(data);

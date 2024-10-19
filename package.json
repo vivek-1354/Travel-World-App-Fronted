@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-datepicker": "^7.2.0",
     "react-dom": "^18.3.1",
@@ -19,9 +20,9 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object":"^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
-  "proxy" :"http://13.232.37.25:8000",
+  "proxy": "http://13.232.37.25:8000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
