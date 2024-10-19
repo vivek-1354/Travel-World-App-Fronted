@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object":"^7.21.11"
   },
+  "proxy" :"http://13.232.37.25:8000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
