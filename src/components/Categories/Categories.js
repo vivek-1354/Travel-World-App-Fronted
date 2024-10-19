@@ -13,7 +13,7 @@ export const Categories = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await axios.get('http://localhost:8000/api/categories')
+            const response = await axios.get('/api/categories')
             const categoriesToShow = response.data.slice(
                 numberOfCategoryToShow + 10 > response.data.length
                     ? response.data.length - 10
