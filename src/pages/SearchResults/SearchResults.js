@@ -11,7 +11,7 @@ export const SearchResults = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(`http://localhost:8000/api/hotels`);
+      const response = await axios.get(`/api/hotels`);
       setHotels(response.data);
       // console.log(response.data)
     })();
